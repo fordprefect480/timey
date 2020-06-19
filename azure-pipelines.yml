@@ -20,6 +20,14 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish Blog
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish:
     ArtifactName: Drop
     publishLocation: 'Container'
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: '$(Build.ArtifactStagingDirectory)'
+    azureSubscription: 'Pay-As-You-Go(0965bb35-0dbf-4993-9dcb-5d75ccd0ca44)'
+    Destination: 'AzureBlob'
+    storage: 'timeystorageaccount'
+    ContainerName: '$web'
