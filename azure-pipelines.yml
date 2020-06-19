@@ -26,7 +26,7 @@ steps:
 
 - task: AzureFileCopy@3
   inputs:
-    SourcePath: '$(Build.ArtifactStagingDirectory)'
+    SourcePath: '$(Build.ArtifactStagingDirectory)/wwwroot'
     azureSubscription: 'Pay-As-You-Go(0965bb35-0dbf-4993-9dcb-5d75ccd0ca44)'
     Destination: 'AzureBlob'
     storage: 'timeystorageaccount'
