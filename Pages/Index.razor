@@ -1,0 +1,57 @@
+﻿@page "/"
+
+<div class="container">
+    <div class="row">
+        <form>
+            <div class="form-group">
+                <input type="datetime" value="@dt" class="form-control form-control-lg hero-input" id="colFormLabelLg" @onchange="Refresh" placeholder="Paste a date/time..." autofocus>
+            </div>
+        </form>
+    </div>
+    <div class="form-group row">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">UTC</h5>
+            <h6 class="card-subtitle mb-2 text-muted">UTC</h6>
+            <p class="card-text">@utc</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>   
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">QLD</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Australian Eastern Standard Time (GMT+10)</h6>
+            <p class="card-text">@utc</p>
+          </div>
+        </div>
+    </div>
+        </div>
+</div>
+
+@code {
+    private string dt;
+    private string utc;
+    private string qld;
+
+    private void Refresh(ChangeEventArgs args)
+    {
+        if (string.IsNullOrWhiteSpace(args.Value.ToString()))
+        {
+            utc = string.Empty;
+            return;
+        }
+
+        // 01/07/2020 10:00:00
+        var success = DateTime.TryParse(args.Value.ToString(), out DateTime dtParsed);
+        if (!success)
+        {
+            utc = "Failed to parse";
+        }
+        else
+        {
+            var utcDateTime = dtParsed.ToUniversalTime();
+            utc = utcDateTime.ToString();            
+            qld = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, TimeZoneInfo.FindSystemTimeZoneById("E. Australia Standard Time")).ToString();
+        }
+    }
+}
