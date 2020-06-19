@@ -14,7 +14,7 @@ steps:
 
 - script: dotnet build --configuration $(buildConfiguration) timey.sln
   displayName: 'dotnet build $(buildConfiguration) timey'
-- script: dotnet publish --output $(Build.ArtifactStagingDirectory)/publish timey.sln
+- script: dotnet publish --output $(Build.ArtifactStagingDirectory) timey.sln
   displayName: 'dotnet publish timey'
 
 - task: PublishBuildArtifacts@1
@@ -26,7 +26,7 @@ steps:
 
 - task: AzureFileCopy@4
   inputs:
-    SourcePath: '$(Build.ArtifactStagingDirectory)/publish'
+    SourcePath: '$(Build.ArtifactStagingDirectory)'
     azureSubscription: 'Pay-As-You-Go(0965bb35-0dbf-4993-9dcb-5d75ccd0ca44)'
     Destination: 'AzureBlob'
     storage: 'timeystorageaccount'
