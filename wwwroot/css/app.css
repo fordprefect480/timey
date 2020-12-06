@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -12,38 +12,6 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
-}
-
-app {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.top-row {
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-    background-image: linear-gradient(90deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
-.main {
-    flex: 1;
-}
-
-    .main .top-row {
-        border-bottom: 1px solid #d6d5d5;
-        justify-content: flex-start;
-    }
-
-        .main .top-row > a, .main .top-row .btn-link {
-            white-space: nowrap;
-            margin-left: 1.5rem;
-        }
-
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .content {
@@ -63,7 +31,7 @@ app {
 }
 
 #blazor-error-ui {
-    background: #ffa39e;
+    background: lightyellow;
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
     display: none;
@@ -74,135 +42,9 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
-
-@media (max-width: 767.98px) {
-  
-    .main .top-row.auth {
-        justify-content: space-between;
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
     }
-
-    .main .top-row a, .main .top-row .btn-link {
-        margin-left: 0;
-    }
-}
-
-@media (min-width: 768px) {
-    app {
-        flex-direction: row;
-    }
-
-    .main .top-row {
-        position: sticky;
-        top: 0;
-    }
-
-    .main > div {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
-    }
-}
-
-.hero-input, .hero-input:focus {
-    font-size: 5.25rem;
-    border: none;
-    box-shadow: none;
-}
-.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #d8d8d8;
-    opacity: 1; /* Firefox */
-    text-align: center;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #d8d8d8;
-    text-align: center;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: #d8d8d8;
-    text-align: center;
-}
-
-#colFormLabelLg {
-    font-size: 7.2vw;
-    font-weight: 600;
-}
-    #colFormLabelLg:-webkit-autofill {
-        background-color: white !important;
-    }
-
-.navbar-brand {
-    padding-top: 0.09rem;
-}
-button.link {
-    background: none;
-    border: none;
-    outline: none;
-    padding: 10px 0px 10px 50px;
-}
-
-
-#utcCopied, #acstCopied {
-    opacity: 0;
-    color: #26b050;
-    margin-left: 5px;
-}
-.clicked {
-    -webkit-animation: target-fade 1s;
-    -moz-animation: target-fade 1s;
-    -o-animation: target-fade 1s;
-    animation: target-fade 1s;
-}
-
-
-/**
- * Keyframe animation definition
- * 
- * 1. Insert a color of your choice here
- */
-
-@-webkit-keyframes target-fade {
-    from {
-        opacity: 1;
-    }
-    /* [1] */
-    to {
-        opacity: 0;
-    }
-}
-
-@-moz-keyframes target-fade {
-    from {
-        opacity: 1;
-    }
-    /* [1] */
-    to {
-        opacity: 0;
-    }
-}
-
-@-o-keyframes target-fade {
-    from {
-        opacity: 1;
-    }
-    /* [1] */
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes target-fade {
-    from {
-        opacity: 1;
-    }
-    /* [1] */
-    to {
-        opacity: 0;
-    }
-}
