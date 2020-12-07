@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -41,10 +41,10 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 .content {
     padding-top: 1.1rem;
@@ -74,15 +74,15 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 @media (max-width: 767.98px) {
-  
+
     .main .top-row.auth {
         justify-content: space-between;
     }
@@ -113,6 +113,7 @@ app {
     border: none;
     box-shadow: none;
 }
+
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #d8d8d8;
     opacity: 1; /* Firefox */
@@ -133,6 +134,7 @@ app {
     font-size: 7.2vw;
     font-weight: 600;
 }
+
     #colFormLabelLg:-webkit-autofill {
         background-color: white !important;
     }
@@ -140,6 +142,7 @@ app {
 .navbar-brand {
     padding-top: 0.09rem;
 }
+
 button.link {
     background: none;
     border: none;
@@ -153,6 +156,7 @@ button.link {
     color: #26b050;
     margin-left: 5px;
 }
+
 .clicked {
     -webkit-animation: target-fade 1s;
     -moz-animation: target-fade 1s;
