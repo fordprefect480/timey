@@ -1,7 +1,81 @@
 ﻿@page "/"
+@using System.Globalization 
 
-<h1>Hello, world!</h1>
+<div class="">
+    <div class="row">
+        <form autocomplete="off">
+            <div class="form-group">
+                <input type="datetime" value="@dt" class="form-control form-control-lg hero-input text-center" id="colFormLabelLg"  @oninput="(EventArgs) => {Refresh(EventArgs.Value.ToString());}" placeholder="Paste a date/time..." autofocus>
+            </div>
+        </form>
+    </div>
+    <div class="form-group row">     
+        <div class="col-sm text-center">
+            <h3 class="font-weight-bold">To UTC</h3>
+            <button id="utcBtn" class="link" onclick="navigator.clipboard.writeText(this.innerText); utcCopied.classList.add('clicked'); setTimeout(function () { utcCopied.classList.remove('clicked');  }, 1000);">@utc</button><span id="utcCopied">Copied!</span>
+        </div>
+        <div class="col-sm text-center">
+            <h3 class="font-weight-bold">To ACST</h3>
+            <button id="acstBtn" class="link" onclick="navigator.clipboard.writeText(this.innerText); acstCopied.classList.add('clicked'); setTimeout(function () { acstCopied.classList.remove('clicked');  }, 1000);">@cen</button><span id="acstCopied">Copied!</span>
+        </div>
+    </div>
+</div>
 
-Welcome to your new app.
+@code 
+{
+    private static class Formats
+    {
+        public static string AppInsights => "MM/d/yyyy, HH:mm:ss.FFF tt";
+        public static string SqlServerManagementStudio => "yyyy-MM-dd HH:mm:ss.FFF";
+    }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    private string dt;
+    private string utc;
+    private string cen;
+
+    private void Refresh(string val)
+    {
+        if (string.IsNullOrWhiteSpace(val))
+        {
+            utc = string.Empty;
+            return;
+        }
+
+        try
+        {
+            // Default SQL datetime: 2018-04-14 07:33:39.267
+            var success = DateTime.TryParseExact(val, Formats.SqlServerManagementStudio, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime _);
+            if (success)
+            {
+                //treat given date as local
+                var assumedLocal = DateTime.ParseExact(val, Formats.SqlServerManagementStudio, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
+                utc = assumedLocal.ToUniversalTime().ToString(Formats.SqlServerManagementStudio);
+
+                //treat given date as utc
+                var assumedUtc = DateTime.ParseExact(val, Formats.SqlServerManagementStudio, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal);
+                var timezone = TimeZoneInfo.FindSystemTimeZoneById("Australia/Adelaide");
+                cen = TimeZoneInfo.ConvertTimeFromUtc(assumedUtc, timezone).ToString(Formats.SqlServerManagementStudio);
+                return;
+            }
+
+            // Azure App Insights: 12/5/2020, 11:16:02.630 AM
+            success = DateTime.TryParseExact(val, Formats.AppInsights, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime _);
+            if (success)
+            {
+                //treat given date as local
+                var assumedLocal = DateTime.ParseExact(val, Formats.AppInsights, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
+                utc = assumedLocal.ToUniversalTime().ToString(Formats.AppInsights);
+
+                //treat given date as utc
+                var assumedUtc = DateTime.ParseExact(val, Formats.AppInsights, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal);
+                var timezone = TimeZoneInfo.FindSystemTimeZoneById("Australia/Adelaide");
+                cen = TimeZoneInfo.ConvertTimeFromUtc(assumedUtc, timezone).ToString(Formats.AppInsights);
+                return;
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+}
